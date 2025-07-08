@@ -107,32 +107,8 @@
                     <th>PDF File</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>CI20250701_132650_0159_97267795</td>
-                    <td><a href="kết quả/CI20250701_132650_0159_97267795.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
-                    <td><a href="kết quả/CI20250701_132650_0159_97267795.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
-                </tr>
-                <tr>
-                    <td>CI20250701_132724_7429_59550009</td>
-                    <td><a href="kết quả/CI20250701_132724_7429_59550009.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
-                    <td><a href="kết quả/CI20250701_132724_7429_59550009.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
-                </tr>
-                <tr>
-                    <td>CI20250701_132804_5453_96516626</td>
-                    <td><a href="kết quả/CI20250701_132804_5453_96516626.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
-                    <td><a href="kết quả/CI20250701_132804_5453_96516626.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
-                </tr>
-                <tr>
-                    <td>CI20250701_132837_5157_25032039</td>
-                    <td><a href="kết quả/CI20250701_132837_5157_25032039.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
-                    <td><a href="kết quả/CI20250701_132837_5157_25032039.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
-                </tr>
-                <tr>
-                    <td>CI20250701_132945_1923_72383144</td>
-                    <td><a href="kết quả/CI20250701_132945_1923_72383144.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
-                    <td><a href="kết quả/CI20250701_132945_1923_72383144.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
-                </tr>
+            <tbody id="tableBody">
+                <!-- Table rows will be populated by JavaScript -->
                 </tbody>
         </table>
     </div>
@@ -142,6 +118,30 @@
     </div>
 
     <script>
+        // List of files in the results folder
+        const files = [
+            'CI20250701_132650_0159_97267795',
+            'CI20250701_132724_7429_59550009',
+            'CI20250701_132804_5453_96516626',
+            'CI20250701_132837_5157_25032039',
+            'CI20250701_132945_1923_72383144'
+        ];
+
+        function loadTableData() {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            files.forEach(fileId => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${fileId}</td>
+                    <td><a href="results/${fileId}.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
+                    <td><a href="results/${fileId}.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
         function filterTable() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("searchInput");
@@ -160,6 +160,9 @@
                 }       
             }
         }
+
+        // Load table data when page loads
+        document.addEventListener('DOMContentLoaded', loadTableData);
     </script>
 
 </body>
