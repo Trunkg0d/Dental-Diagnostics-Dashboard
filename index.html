@@ -17,6 +17,7 @@
             padding: 2rem;
             color: white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
         }
         .header h1 {
             font-size: 2.25rem;
@@ -45,13 +46,14 @@
         }
         th, td {
             padding: 1.25rem 1.5rem;
-            text-align: left;
+            text-align: center;
             border-bottom: 1px solid #e5e7eb;
         }
         th {
             background-color: #f9fafb;
             font-weight: 600;
             color: #374151;
+            text-align: center;
         }
         tr:hover {
             background-color: #f9fafb;
@@ -85,6 +87,27 @@
             padding: 2rem;
             color: #6b7280;
             font-size: 0.875rem;
+        }
+        .id-cell {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .id-image {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.375rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .id-caption {
+            font-size: 0.75rem;
+            color: #6b7280;
+            font-weight: 500;
+            word-break: break-all;
         }
     </style>
 </head>
@@ -222,14 +245,32 @@
             'CI20250701_133741_0515_43618477'
         ];
 
+        // Function to get the correct image extension for a file ID
+        function getImageExtension(fileId) {
+            // Most files use .jpg, but some use .jpeg
+            // We'll try .jpg first, and if it doesn't exist, use .jpeg
+            const jpegFiles = [
+                'CI20250701_110254_4670_49088757',
+                'CI20250701_110337_5064_81412391',
+                'CI20250701_111440_0855_27322594',
+                'CI20250701_112032_3495_23089860',
+                'CI20250701_133607_2495_00558520'
+            ];
+            return jpegFiles.includes(fileId) ? 'jpeg' : 'jpg';
+        }
+
         function loadTableData() {
             const tableBody = document.getElementById('tableBody');
             tableBody.innerHTML = '';
 
             files.forEach(fileId => {
+                const imageExt = getImageExtension(fileId);
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${fileId}</td>
+                    <td class="id-cell">
+                        <img src="images/${fileId}.${imageExt}" alt="${fileId}" class="id-image" onerror="this.style.display='none'">
+                        <div class="id-caption">${fileId}</div>
+                    </td>
                     <td><a href="results/${fileId}.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
                     <td><a href="results/${fileId}.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
                 `;
@@ -246,7 +287,9 @@
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[0];
                 if (td) {
-                    txtValue = td.textContent || td.innerText;
+                    // Get text from the caption div instead of the entire cell
+                    const captionDiv = td.querySelector('.id-caption');
+                    txtValue = captionDiv ? captionDiv.textContent || captionDiv.innerText : td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
                     } else {
