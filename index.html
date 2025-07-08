@@ -5,28 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dental Diagnostics Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
         }
         .header {
-            background-color: #ffffff;
-            padding: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-bottom: 1px solid #e2e8f0;
+            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            padding: 2rem;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .header h1 {
-            font-size: 1.875rem;
+            font-size: 2.25rem;
             font-weight: 700;
-            color: #1a202c;
+        }
+        .search-container {
+            margin: 2rem;
+        }
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
         .table-container {
-            margin: 2rem;
+            margin: 0 2rem 2rem;
             background-color: #ffffff;
             border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             overflow: hidden;
         }
         table {
@@ -34,27 +44,47 @@
             border-collapse: collapse;
         }
         th, td {
-            padding: 1rem 1.5rem;
+            padding: 1.25rem 1.5rem;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e5e7eb;
         }
         th {
-            background-color: #f7fafc;
+            background-color: #f9fafb;
             font-weight: 600;
-            color: #4a5568;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            color: #374151;
         }
         tr:hover {
-            background-color: #f7fafc;
+            background-color: #f9fafb;
         }
-        a {
-            color: #4299e1;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: white;
+            transition: background-color 0.3s ease;
         }
-        a:hover {
-            color: #2b6cb0;
+        .btn-html {
+            background-color: #3b82f6;
+        }
+        .btn-html:hover {
+            background-color: #2563eb;
+        }
+        .btn-pdf {
+            background-color: #ef4444;
+        }
+        .btn-pdf:hover {
+            background-color: #dc2626;
+        }
+        .btn i {
+            margin-right: 0.5rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+            font-size: 0.875rem;
         }
     </style>
 </head>
@@ -64,8 +94,12 @@
         <h1>Dental Diagnostics Dashboard</h1>
     </div>
 
+    <div class="search-container">
+        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search by ID..." class="search-input">
+    </div>
+
     <div class="table-container">
-        <table>
+        <table id="dashboardTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -76,32 +110,57 @@
             <tbody>
                 <tr>
                     <td>CI20250701_132650_0159_97267795</td>
-                    <td><a href="kết quả/CI20250701_132650_0159_97267795.html" target="_blank">View Report</a></td>
-                    <td><a href="kết quả/CI20250701_132650_0159_97267795.pdf" target="_blank">View PDF</a></td>
+                    <td><a href="kết quả/CI20250701_132650_0159_97267795.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
+                    <td><a href="kết quả/CI20250701_132650_0159_97267795.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
                 </tr>
                 <tr>
                     <td>CI20250701_132724_7429_59550009</td>
-                    <td><a href="kết quả/CI20250701_132724_7429_59550009.html" target="_blank">View Report</a></td>
-                    <td><a href="kết quả/CI20250701_132724_7429_59550009.pdf" target="_blank">View PDF</a></td>
+                    <td><a href="kết quả/CI20250701_132724_7429_59550009.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
+                    <td><a href="kết quả/CI20250701_132724_7429_59550009.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
                 </tr>
                 <tr>
                     <td>CI20250701_132804_5453_96516626</td>
-                    <td><a href="kết quả/CI20250701_132804_5453_96516626.html" target="_blank">View Report</a></td>
-                    <td><a href="kết quả/CI20250701_132804_5453_96516626.pdf" target="_blank">View PDF</a></td>
+                    <td><a href="kết quả/CI20250701_132804_5453_96516626.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
+                    <td><a href="kết quả/CI20250701_132804_5453_96516626.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
                 </tr>
                 <tr>
                     <td>CI20250701_132837_5157_25032039</td>
-                    <td><a href="kết quả/CI20250701_132837_5157_25032039.html" target="_blank">View Report</a></td>
-                    <td><a href="kết quả/CI20250701_132837_5157_25032039.pdf" target="_blank">View PDF</a></td>
+                    <td><a href="kết quả/CI20250701_132837_5157_25032039.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
+                    <td><a href="kết quả/CI20250701_132837_5157_25032039.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
                 </tr>
                 <tr>
                     <td>CI20250701_132945_1923_72383144</td>
-                    <td><a href="kết quả/CI20250701_132945_1923_72383144.html" target="_blank">View Report</a></td>
-                    <td><a href="kết quả/CI20250701_132945_1923_72383144.pdf" target="_blank">View PDF</a></td>
+                    <td><a href="kết quả/CI20250701_132945_1923_72383144.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
+                    <td><a href="kết quả/CI20250701_132945_1923_72383144.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
                 </tr>
                 </tbody>
         </table>
     </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Dental Diagnostics Dashboard. All rights reserved.</p>
+    </div>
+
+    <script>
+        function filterTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("dashboardTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+        }
+    </script>
 
 </body>
 </html>
