@@ -118,7 +118,7 @@
     </div>
 
     <script>
-        // List of files in the kết quả folder
+        // List of files in the results folder
         const files = [
             'CI20250701_132650_0159_97267795',
             'CI20250701_132724_7429_59550009',
@@ -135,8 +135,8 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${fileId}</td>
-                    <td><a href="kết quả/${fileId}.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
-                    <td><a href="kết quả/${fileId}.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
+                    <td><a href="results/${fileId}.html" class="btn btn-html" target="_blank"><i class="fas fa-file-alt"></i>View HTML</a></td>
+                    <td><a href="results/${fileId}.pdf" class="btn btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i>View PDF</a></td>
                 `;
                 tableBody.appendChild(row);
             });
